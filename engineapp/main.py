@@ -359,7 +359,7 @@ def delete_database():
 
 class MainWebPage(MainHandler):
     def render_front(self):
-        self.render('webPage.html', error=" ")
+        self.render('webPage.html', error=" ", user=self.user)
 
     def get(self):
         self.render_front()

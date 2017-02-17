@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/animate.css" />
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/viewportchecker.js"></script>
+
+
+    <link type="text/css"  rel="stylesheet"  href="/static/style.css"/>
+
+
+    <script src="/static/script.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-default" style="background-color: black; margin-bottom: 0em">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">ProDrive Cam</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#" style="font-family: 'VT323', monospace; font-size: 3.5em; color: darkorange">ProDrive Cam</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="#">About<span class="sr-only">(current)</span></a></li>
+        <li><a href="/blog">BLOG</a> </li>
+         <li><a href="#" data-toggle="modal" data-target="#myModal">Contact Us</a></li>
+        <li><a href="#">Log-In</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+<div class="bgimg-1">
+  <div class="caption text">
+    <span class="border">Safety Matters !!! </span>
+  </div>
+    <div class="contentDiv">
+    <img class="arrow" src="../static/down-arrow.svg" />
+</div>
+</div>
+
+<div class="text" style="color: #777;text-align:center;padding:50px 80px;text-align: justify; background-color: linen">
+  <h3 style="text-align:center;">ProDrive Cam is not only about recording the video while you drive, but also saving the incidents to cloud,
+      getting GPS location of the vehicle real time and detection of traffic signs. This requires the installation of Nvidia Tk1 on the vehicle.
+  Our aim is to protect the business with false implication when some accident occurs. And also to improve the behaviour of the driver by monitoring
+  the real time data from vehicle. </h3>
+  <p></p>
+</div>
+
+<div class="bgimg-2">
+  <div class="caption text">
+    <span class="border " style="font-size:40px;color: red; font-weight: bolder"> Track the Vehicle.</span>
+  </div>
+</div>
+
+<div style="position:relative;" class="text">
+  <div style="color:#ddd;background-color: black;text-align:center;padding:50px 80px;text-align: justify;">
+    <p>Track your fleet by Sitting At Your Home Or Office. We provide exact location of the vehicle on the road.</p>
+  </div>
+</div>
+
+<div class="bgimg-3">
+  <div class="caption text">
+    <span class="border" style="font-size:40px;color:red; font-weight: bolder">Detection of traffic Signs</span>
+  </div>
+</div>
+
+
+<div style="position:relative;">
+  <div style="color:#ddd;background-color: black;text-align:center;padding:50px 80px;text-align: justify;">
+    <p>This product also helps the driver real time with detection of Traffic Signs and alerting driver.</p>
+  </div>
+</div>
+
+<div class="bgimg-4">
+  <div class="caption text">
+    <span class="border" style="color: red">Record any Incident.</span>
+  </div>
+</div>
+
+<div style="position:relative;">
+  <div style="color:#ddd;background-color: black;text-align:center;padding:50px 80px;text-align: justify; border-bottom: .2em solid coral">
+    <p>The device installed on the Vehicle will save the video when some accident occurs. This video will be sent to cloud and
+    admin will have access to see the video of the accident. This could help the business against any false implication and will
+    process the claims faster.</p>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Contact Form</h4>
+      </div>
+      <div class="modal-body">
+
+
+
+			<div class="row" style="background: url('http://www.johnreilly.co.uk/images/get_in_touch.jpg');">
+
+                <form role="form" class="form-horizontal" >
+							<div class="form-group" >
+								<div class="col-sm-2">
+										<label for="email">Email: </label>
+								</div>
+								<div class="col-sm-10 ">
+								<p id="form-error" style="display:none; font-size: 12px; color:red;">Enter proper format!!</p>
+								</div>
+
+								<div class="col-sm-10">
+										<input type="email" class="form-control" id="email" placeholder="xyz@abc.com">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-2">
+										<label for="cell" > Mobile: </label>
+								</div>
+								<div class="col-sm-10">
+								<p id="form-error-tel" style="display:none; font-size: 12px; color:red;">Enter proper format!!</p>
+								</div>
+								<div class="col-sm-10">
+										<input type="tel" class="form-control" id="cell" placeholder="Cell Number">
+								</div>
+							</div>
+							<div class="form-group">
+									<div class="col-sm-2">
+	  										<label for="comment">Comment:</label>
+	  								</div>
+	  								<div class="col-sm-10">
+	  										<textarea class="form-control" rows="2" id="comment"></textarea>
+									</div>
+							</div>
+
+							<div class="form-group col-sm-4 col-sm-offset-2">
+								<button type="submit" class="button1" >Submit</button>
+							</div>
+					</form>
+			</div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+<div class="footer container-fluid">
+		<div class="row">
+			<div class="col-sm-6 ">
+
+
+			</div>
+			<div class="col-sm-6 ">
+				<ul style="list-style-type: none; margin-right: 2em" class="list-inline pull-right">
+					<li><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-envelope">Email</a></li>
+					<li><a href="#"><img src="http://login.create.net/images/icons/user/facebook_30x30.png">Connect on Facebook</a></li>
+					<li><a href="#"><img src="http://login.create.net/images/icons/user/twitter_130x50.png"></a></li>
+				</ul>
+			</div>
+
+
+		</div>
+</div>
+
+
+
+</body>
+
+</body>
+</html>

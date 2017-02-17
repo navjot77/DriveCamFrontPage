@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!-- This page renders when user wishes to add comment to
+      any blog except his/her own blog-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>adding comment</title>
+</head>
+{% extends "base_navigation.html" %}
+{% block content %}
+    <form method="post" action="/blog/comment" style="margin: auto">
+        <h1>{{ s.subject }}</h1>
+        <blockquote>{{ s.blog }}</blockquote>
+        <textarea name="comment"></textarea>
+        <input type="hidden" name="blog_id" value="{{ s.key().id() }}">
+        <input type="submit">
+    </form>
+{% endblock %}
+</html>

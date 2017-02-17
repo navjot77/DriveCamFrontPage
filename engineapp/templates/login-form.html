@@ -1,7 +1,65 @@
-<!DOCTYPE html>
+{% extends "webPage.html" %}
 
-<!--This files gets rendered when user wishes to login,
- or when user logs out or when user tries to open main page without logged in. -->
+{% block login %}
+
+<div class="modal fade" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Contact Form</h4>
+      </div>
+      <div class="modal-body">
+
+
+
+			<div class="row" style="background: url('http://www.johnreilly.co.uk/images/get_in_touch.jpg');">
+
+                <form role="form" class="form-horizontal" method="POST">
+							<div class="form-group" >
+								<div class="col-sm-2">
+										<label for="username">User Name: </label>
+								</div>
+								<div class="col-sm-10 ">
+								<p id="form-error" style="display:none; font-size: 12px; color:red;">Enter proper format!!</p>
+								</div>
+
+								<div class="col-sm-10">
+										<input type="text" class="form-control" name="username" value="{{ username }}" placeholder="Name !!">
+								</div>
+							</div>
+
+							<div class="form-group">
+									<div class="col-sm-2">
+	  										<label for="password">Password:</label>
+	  								</div>
+	  								<div class="col-sm-10">
+                                        <input type="password" class="form-control" name="password" value="{{ password }}" placeholder="Password !!">
+
+									</div>
+							</div>
+
+							<div class="form-group col-sm-4 col-sm-offset-2">
+								<button type="submit" class="button1" >Submit</button>
+							</div>
+					</form>
+			</div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}
+
+<!--
+
+
+<!DOCTYPE html>
 
 <html>
   <head>
@@ -47,3 +105,4 @@
   </body>
 
 </html>
+-->

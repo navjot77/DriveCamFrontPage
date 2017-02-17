@@ -14,6 +14,9 @@ from string import letters
 import random
 from google.appengine.ext.db import metadata
 
+
+
+
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
@@ -375,7 +378,7 @@ class MainBlogPage(MainHandler):
         comments = db.GqlQuery("select * from COMMENT")
         per_comments = db.GqlQuery("select * from PER_COMMENT")
         blogs = blogs_all.fetch(limit=10)
-
+        user_logged=self.user
 
         self.render('blog.html', blogs=blogs, like=likes,
                     comments=comments, like_error=like_error,
@@ -389,7 +392,8 @@ class MainBlogPage(MainHandler):
                     comment_delete_error=comment_delete_error,
                     comment_delete_id=comment_delete_id,
                     comment_edit_error=comment_edit_error,
-                    comment_edit_id=comment_edit_id)
+                    comment_edit_id=comment_edit_id,
+                    user_logged=user_logged)
 
 
     def get(self):

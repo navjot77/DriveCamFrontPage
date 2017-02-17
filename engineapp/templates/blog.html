@@ -22,8 +22,11 @@ src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js">
    margin-top:1.5em; padding-bottom: 1em; margin-left: 2em;margin-right: 2em;">
   <li role="presentation" class="active"><a href="/blog">Home</a></li>
   <li role="presentation"><a href="/blog/newpost">New Post</a></li>
-    {%  %}
+  {% if user_logged %}
   <li role="presentation"><a href="/blog/logout">Logout</a></li>
+    {% else %}
+      <li role="presentation"><a href="/blog/logout">Login</a></li>
+    {% endif %}
 </ul>
 
 

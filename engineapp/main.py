@@ -247,12 +247,14 @@ class Login(MainHandler):
 
     def get(self):
         if self.user:
+            logging.info("Inside GET ---------------------")
             self.logout()
-            self.redirect('/blog')
+            self.redirect('/')
         else:
-            self.render('login-form.html')
+            self.redirect('/')
 
     def post(self):
+        logging.info("Inside POST ---------------------")
         self.username = self.request.get('username')
         self.password = self.request.get('password')
         u = User.login(self.username, self.password)
@@ -261,7 +263,8 @@ class Login(MainHandler):
             self.redirect('/blog')
         else:
             msg = 'Invalid login'
-            self.render('login-form.html', error=msg)
+            self.render('webPage.html', error=msg)
+
 
 
 class Logout(MainHandler):
@@ -356,7 +359,7 @@ def delete_database():
 
 class MainWebPage(MainHandler):
     def render_front(self):
-        self.render('webPage.html')
+        self.render('webPage.html', error=" ")
 
     def get(self):
         self.render_front()
@@ -624,6 +627,7 @@ app = webapp2.WSGIApplication([('/blog/newpost', BlogPage),
                                ('/blog/register', Register),
                                ('/blog/welcome', ThanksHandler),
                                ('/blog/login', Login),
+                               ('/login', Login),
                                ('/blog/logout', Logout),
                                ('/blog/edit', EditBlog),
                                ('/blog/postEdition', PostEdition),

@@ -50,6 +50,9 @@
     </div>
   </div>
 </nav>
+ <div style="color:red; background-color: #111111; font-size: large">
+                      {{error}}
+            </div>
 
 
 
@@ -110,11 +113,58 @@
   </div>
 </div>
 
-{% block login %}
 
-<!-- Log-In Modal -->
+<div class="modal" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel1">Login Form</h4>
+      </div>
+      <div class="modal-body">
 
-{% endblock %}
+
+
+			<div class="row" style="background: url('http://www.johnreilly.co.uk/images/get_in_touch.jpg');">
+
+                <form role="form" class="form-horizontal" method="POST" action="/blog/login">
+							<div class="form-group" >
+								<div class="col-sm-2">
+										<label for="username">User Name: </label>
+								</div>
+								<div class="col-sm-10 ">
+								<p id="form-error" style="display:none; font-size: 12px; color:red;">Enter proper format!!</p>
+								</div>
+
+								<div class="col-sm-10">
+										<input type="text" class="form-control" name="username" value="{{ username }}" placeholder="Name !!">
+								</div>
+							</div>
+
+							<div class="form-group">
+									<div class="col-sm-2">
+	  										<label for="password">Password:</label>
+	  								</div>
+	  								<div class="col-sm-10">
+                                        <input type="password" class="form-control" name="password" value="{{ password }}" placeholder="Password !!">
+
+									</div>
+							</div>
+
+
+							<div class="form-group col-sm-4 col-sm-offset-2">
+								<button type="submit" >Submit</button>
+							</div>
+					</form>
+			</div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

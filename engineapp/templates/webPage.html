@@ -63,7 +63,7 @@
                       {{error}}
             </div>
 
-
+{% block body %}
 
 
 <div class="bgimg-1">
@@ -122,6 +122,8 @@
   </div>
 </div>
 
+{%  endblock %}
+
 
 <div class="modal" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
   <div class="modal-dialog" role="document">
@@ -161,10 +163,21 @@
 							</div>
 
 
-							<div class="form-group col-sm-4 col-sm-offset-2">
+							<div class="form-group col-sm-12  col-sm-offset-4">
 								<button type="submit" >Submit</button>
 							</div>
+
+
+
+
 					</form>
+                     <div class="form-group col-sm-8 col-sm-offset-4">
+                                <h3>
+                                    <a href="/blog/register" style="text-decoration: none">
+                                        <button class="btn btn-warning">Register Here</button>
+                                    </a>
+                                </h3>
+                            </div>
 			</div>
 
       <div class="modal-footer">
@@ -239,7 +252,7 @@
 
 
 
-<div class="footer container-fluid">
+<div class="footer container-fluid" style="margin: 0em; border: 0em;">
 		<div class="row">
 			<div class="col-sm-6 ">
 
@@ -249,13 +262,13 @@
 				<ul style="list-style-type: none; margin-right: 2em" class="list-inline pull-right">
 					<li><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-envelope">Email</a></li>
 					<li><a href="#"><img src="http://login.create.net/images/icons/user/facebook_30x30.png">Connect on Facebook</a></li>
-					<li><a href="#"><img src="http://login.create.net/images/icons/user/twitter_130x50.png"></a></li>
 				</ul>
 			</div>
 
 
 		</div>
 </div>
+
 
 
 

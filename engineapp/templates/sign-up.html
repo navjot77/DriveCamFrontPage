@@ -1,50 +1,55 @@
-<!DOCTYPE html>
-<!-- This page renders when new user wants to register -->
-<!-- Here extends keyword uses the base page as fundation and then replaces
-    the block content with base page. So we can use base page's template -->
-<head>
-    <title>SignUp</title>
-</head>
-{% extends "base.html" %}
-{% block content %}
 
-    <form method="post" action="/generateCode">
-    <p>To register, Please email us and then one you get a reply, generate a code by clicking below !! </p>
-    <button type="submit">Generate Code </button>
-    </form>
+{% extends "webPage.html" %}
 
+{% block body%}
+<div class="container" style="height: 75%; margin: 2em">
 
-<form method="post">
-<label>User Name
-    <input type="text" name="userName" value="{{ items['UserName'] }}">
-</label>
-<p style="color: red;">{{ items['UserError'] }}</p>
-    <p style="color: red;">{{ items['error_username'] }}</p>
+<div class="row" style="margin: 1em">
+<form method="post" action="/generateCode">
+To register, Please email us and then one you get a reply, generate a code by clicking below !!
+    <input type="email" placeholder="Your Email Id" name="userEmail"/>
+<button class="btn btn-primary pull-right" type="submit">Generate Code </button>
+      {%  if code and code|int %}
+          <br/>
+    <label style="color: green"> Your Code is -> {{ code }}</label>
+    {% elif code and code|length >10 %}
+    <label style="color: red">{{ code }}</label>
+    {% endif %}
 
-
-<label>Password
-    <input type="password" name="password">
-</label>
-    <p style="color: red;">{{ items['PassError'] }}</p>
-<label>Re-Enter password
-    <input type="password" name="passwordRe">
-</label>
-    <p style="color: red;">{{ items['PassReError'] }}</p>
-<label>Email
-    <input type="text" name="email" value="{{ items['email']}}">
-</label>
-    <p style="color: red;">{{ items['EmailError'] }}</p>
-<label> Enter the Code
-    <input type="text" name="code" />
-</label>
-<input type="submit">
 </form>
-<h2>Already Register ?</h2>
+</div>
+
+<div class="row">
+
+
+<form method="post" action="/blog/register">
+
+
+<label>User Email    <input type="text" name="email" value="{{ items['email']}}"> </label>
+    <p style="color: red;">{{ items['EmailError'] }}</p>
+
+<label>Password    <input type="password" name="password"></label>
+    <p style="color: red;">{{ items['PassError'] }}</p>
+
+<label>Re-Enter password    <input type="password" name="passwordRe">
+</label>    <p style="color: red;">{{ items['PassReError'] }}</p>
+
+
+
+<label> Enter the Code    <input type="text" name="code" /> </label>
+    <p style="color: red;">{{ items['codeError'] }}</p>
+<br>
+
+    <button class="btn btn-default btn-lg" type="submit"> SUBMIT </button>
+</form>
+
+<h2>Already Registered ?</h2>
 <h2 >
-    <a href="/blog/login">
-        <em style="background-color: antiquewhite">
-        Log-In
-        </em>
+    <a href="/">
+       <button class="btn btn-warning">Log-In</button>
     </a>
 </h2>
+</div>
+</div>
+
 {% endblock %}

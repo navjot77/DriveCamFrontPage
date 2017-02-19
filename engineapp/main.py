@@ -14,6 +14,8 @@ from string import letters
 import random
 from google.appengine.ext.db import metadata
 
+from google.appengine.ext import ndb
+
 
 
 
@@ -25,6 +27,33 @@ USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
 PASS_RE = re.compile(r"^.{3,20}$")
 EMAIL_RE = re.compile(r"^[\S]+@[\S]+.[\S]+$")
 secret = 'Navjot'
+
+
+class UserCode(ndb.Model):
+    """User-Code profile"""
+    code=ndb.IntegerProperty()
+    email =ndb.StringProperty(required=True)
+
+
+    @classmethod
+    def user_code(cls, user):
+        """Checks and adds code to user email"""
+        code = UserCode.query(UserCode.email == user).get()
+
+        if not code:
+            return "Email Id Does Not exist, Code can not be generated"
+        else:
+            codeNumber=random.randrange(100000, 99999999)
+            code.code=codeNumber
+            code.put()
+            return codeNumber
+    @classmethod
+    def by_name(cls, name,code):
+        u = UserCode.query(UserCode.email==name, UserCode.code==code).get()
+        logging.info("*******************************")
+        logging.info(code)
+        logging.info(u)
+        return u
 
 
 class COMMENT(db.Model):
@@ -162,6 +191,20 @@ def users_key(group='default'):
     return db.Key.from_path('User', group)
 
 
+class GenerateCode(MainHandler):
+    def send_data(self, file, code="", items=""):
+        self.render(file, code=code,items=items)
+
+    def get(self):
+        self.send_data("sign-up.html")
+
+    def post(self):
+        user_email=self.request.get("userEmail")
+        data=UserCode.user_code(user_email)
+        self.send_data("sign-up.html",code=data)
+
+
+
 
 class Register(MainHandler):
     """ class Register generates the sign-up page and then act on post
@@ -181,17 +224,24 @@ class Register(MainHandler):
         if self.user:
             self.redirect('/blog')
         else:
-            user_name = self.request.get("userName")
+
+            user_name = self.request.get("email")
             user_pass = self.request.get("password")
             user_pass_re = self.request.get("passwordRe")
-            user_email = self.request.get("email")
-            user_code=self.requesrt.get("code")
-            check_name = USER_RE.match(user_name)
-            check_email = EMAIL_RE.match(user_email)
+
+            user_code=self.request.get("code")
+
+            check_name = EMAIL_RE.match(user_name)
             check_pass = PASS_RE.match(user_pass)
+
+            try:
+                user_code=int(user_code)
+                check_code="1"
+            except:
+                check_code="Code needs to be a number"
             user_error = ""
             pass_error = ""
-            email_error = ""
+            code_error=""
             pass_re_error = ""
             check_re_pass = "Ok"
             page_rendered = False
@@ -199,40 +249,53 @@ class Register(MainHandler):
             if (user_pass != user_pass_re):
                 pass_re_error = "Password does not match"
                 check_re_pass = None
-            if (check_pass and check_email and check_name and check_re_pass):
-                u = User.by_name(user_name)
-                if u:
-                    msg = 'That user already exists.'
+            if (check_pass and check_name and check_re_pass and len(check_code)<3):
+                codeCheck=UserCode.by_name(user_name,user_code)
+                if codeCheck is None:
+                    logging.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                    code_error = 'Code Does Not match'
                     self.send_data("sign-up.html",
-                                   items={"UserName": "",
-                                          "email": user_email,
+                                   items={"email": user_name,
                                           "UserError": user_error,
                                           "PassError": pass_error,
-                                          "EmailError": email_error,
-                                          "PassReError": pass_re_error,
-                                          "error_username": msg})
+                                          "codeError": code_error,
+                                          })
                     page_rendered = True
 
-                else:
-                    u = User.register(user_name, user_pass, user_email)
+
+                u = User.by_name(user_name)
+                if u is None and not page_rendered:
+                    logging.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-")
+                    msg = 'That user already exists.'
+                    self.send_data("sign-up.html",
+                                   items={
+                                          "email": user_name,
+                                          "UserError": msg,
+                                          "PassError": pass_error,
+                                       "codeError": code_error})
+                    page_rendered = True
+
+                if (u is not None) or (codeCheck is not None):
+                    u = User.register(user_name, user_pass, user_name)
                     u.put()
                     self.login(u)
                     self.redirect('/')
             if not check_name:
-                user_error = "User Name not correct"
+                user_error = "User Email not correct"
             if not check_pass:
                 pass_error = "Password not correct"
-            if not check_email:
-                email_error = "Email Address not correct"
+            if len(check_code) > 3:
+                code_error="Code needs to be a number"
+
             if not page_rendered:
                 self.send_data("sign-up.html",
-                               items={"UserName": user_name,
-                                      "email": user_email,
-                                      "UserError": user_error,
+                               items={
+                                      "email": user_name,
+                                      "EmailError": user_error,
                                       "PassError": pass_error,
-                                      "EmailError": email_error,
+                                       "codeError":code_error,
                                       "PassReError": pass_re_error,
-                                      "error_username": ""})
+                                      })
 
 
 class ThanksHandler(webapp2.RequestHandler):
@@ -249,14 +312,14 @@ class Login(MainHandler):
 
     def get(self):
         if self.user:
-            logging.info("Inside GET ---------------------")
+            #logging.info("Inside GET ---------------------")
             self.logout()
             self.redirect('/')
         else:
             self.redirect('/')
 
     def post(self):
-        logging.info("Inside POST ---------------------")
+        #logging.info("Inside POST ---------------------")
         self.username = self.request.get('username')
         self.password = self.request.get('password')
         u = User.login(self.username, self.password)
@@ -365,6 +428,7 @@ class MainWebPage(MainHandler):
 
     def get(self):
         self.render_front()
+
 
 
 class MainBlogPage(MainHandler):
@@ -623,6 +687,7 @@ class EditComment(MainBlogPage):
 
 
 app = webapp2.WSGIApplication([('/blog/newpost', BlogPage),
+                               ('/generateCode',GenerateCode),
                                ('/blog/(\d+)', Permalink),
                                ('/blog', MainBlogPage),
                                ('/', MainWebPage),

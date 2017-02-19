@@ -256,7 +256,7 @@ class Register(MainHandler):
                     code_error = 'Code Does Not match'
                     self.send_data("sign-up.html",
                                    items={"email": user_name,
-                                          "UserError": user_error,
+                                          "EmailError": user_error,
                                           "PassError": pass_error,
                                           "codeError": code_error,
                                           })
@@ -264,18 +264,18 @@ class Register(MainHandler):
 
 
                 u = User.by_name(user_name)
-                if u is None and not page_rendered:
+                if u is not None and not page_rendered:
                     logging.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-")
-                    msg = 'That user already exists.'
+                    msg = 'That user already REGISTERED.'
                     self.send_data("sign-up.html",
                                    items={
                                           "email": user_name,
-                                          "UserError": msg,
+                                          "EmailError": msg,
                                           "PassError": pass_error,
                                        "codeError": code_error})
                     page_rendered = True
 
-                if (u is not None) or (codeCheck is not None):
+                if (u is None) and (codeCheck is not None):
                     u = User.register(user_name, user_pass, user_name)
                     u.put()
                     self.login(u)

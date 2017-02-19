@@ -7,6 +7,13 @@
 </head>
 {% extends "base.html" %}
 {% block content %}
+
+    <form method="post" action="/generateCode">
+    <p>To register, Please email us and then one you get a reply, generate a code by clicking below !! </p>
+    <button type="submit">Generate Code </button>
+    </form>
+
+
 <form method="post">
 <label>User Name
     <input type="text" name="userName" value="{{ items['UserName'] }}">
@@ -27,6 +34,9 @@
     <input type="text" name="email" value="{{ items['email']}}">
 </label>
     <p style="color: red;">{{ items['EmailError'] }}</p>
+<label> Enter the Code
+    <input type="text" name="code" />
+</label>
 <input type="submit">
 </form>
 <h2>Already Register ?</h2>

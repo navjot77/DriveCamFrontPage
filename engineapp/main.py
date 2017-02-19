@@ -185,6 +185,7 @@ class Register(MainHandler):
             user_pass = self.request.get("password")
             user_pass_re = self.request.get("passwordRe")
             user_email = self.request.get("email")
+            user_code=self.requesrt.get("code")
             check_name = USER_RE.match(user_name)
             check_email = EMAIL_RE.match(user_email)
             check_pass = PASS_RE.match(user_pass)
@@ -194,6 +195,7 @@ class Register(MainHandler):
             pass_re_error = ""
             check_re_pass = "Ok"
             page_rendered = False
+
             if (user_pass != user_pass_re):
                 pass_re_error = "Password does not match"
                 check_re_pass = None
@@ -215,7 +217,7 @@ class Register(MainHandler):
                     u = User.register(user_name, user_pass, user_email)
                     u.put()
                     self.login(u)
-                    self.redirect('/blog')
+                    self.redirect('/')
             if not check_name:
                 user_error = "User Name not correct"
             if not check_pass:

@@ -252,7 +252,6 @@ class Register(MainHandler):
             if (check_pass and check_name and check_re_pass and len(check_code)<3):
                 codeCheck=UserCode.by_name(user_name,user_code)
                 if codeCheck is None:
-                    logging.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                     code_error = 'Code Does Not match'
                     self.send_data("sign-up.html",
                                    items={"email": user_name,
@@ -265,7 +264,6 @@ class Register(MainHandler):
 
                 u = User.by_name(user_name)
                 if u is not None and not page_rendered:
-                    logging.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-")
                     msg = 'That user already REGISTERED.'
                     self.send_data("sign-up.html",
                                    items={

@@ -16,30 +16,51 @@ href=
 <script
 src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js">
 </script>
+    <link type="text/css" href="/static/blog.css" rel="stylesheet" >
 </head>
 <body>
-<ul class="nav nav-pills" style="border-bottom: solid rosybrown 1em;
+
+
+<div class="container">
+<ul class="nav nav-pills" style="border-bottom: solid deeppink 0.3em;
    margin-top:1.5em; padding-bottom: 1em; margin-left: 2em;margin-right: 2em;">
-  <li role="presentation" class="active"><a href="/blog">Home</a></li>
-  <li role="presentation"><a href="/blog/newpost">New Post</a></li>
+
+    <li ><a href="/blog" class="nav-data" >
+      <button type="button"> Home </button></a></li>
+  <li class="pull-right" ><a href="/blog/newpost" class="nav-data">
+      <button type="button"> Add New Post</button></a></li>
   {% if user_logged %}
   <li role="presentation"><a href="/blog/logout">Logout</a></li>
-    {% else %}
-      <li role="presentation"><a href="/blog/login">Login</a></li>
-    {% endif %}
+  {% endif %}
 </ul>
 
 
 <!-- Jinja2 template provides for loop that can be used to display
     various elements in html page -->
+<div class="row">
 {% for blog in blogs %}
-    <h1 style="color:#7D3DA6; font-family: 'Segoe UI Semibold'; margin-left: 0.4em">{{ blog.subject }}</h1>
-    <p style="text-align: right; color:darkgoldenrod; margin-right:2em">
-    Author: {{ blog.owner }}
-    </p>
-    <p style="text-align: right; color:darkgoldenrod;margin-right: 2em">
-    Created: {{ blog.created }}
-    </p>
+
+    <div class="col-sm-4 blogBlock">
+    <h1>{{ blog.subject }}</h1>
+     <p>By{{ blog.owner }}</p>
+    <p>Created {{ blog.created }} </p>
+
+    <a href="#" data-toggle="modal" data-target="#myModalLogin">Read More </a>
+
+
+
+<div class="modal" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel1">Blog/h4>
+      </div>
+      <div class="modal-body">
+
+
+           <h1>{{ blog.subject }}</h1>
+     <p>By{{ blog.owner }}</p>
 
     <blockquote style="margin-left: 0.5em">{{ blog.blog }}</blockquote>
 
@@ -158,6 +179,42 @@ will be getting posted, so in that case as this is only view page, we hide
 
 
     <hr>
+
+
+</div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+
+
+
+
+</div>
+
+
+
+
 {%  endfor %}
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
 </body>
 </html>

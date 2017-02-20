@@ -41,8 +41,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li ><a href="#">About</a></li>
+        <li ><a href="/">About</a></li>
+        {% if user %}
         <li><a href="/blog">BLOG</a> </li>
+      {% endif %}
          <li><a href="#" data-toggle="modal" data-target="#myModal">Contact Us</a></li>
 
            {% if user %}
@@ -136,19 +138,19 @@
 
 
 
-			<div class="row" style="background: url('http://www.johnreilly.co.uk/images/get_in_touch.jpg');">
+			<div class="row" style="background: url('/static/login-image.jpg') center no-repeat; background-color: #dddddd">
 
                 <form role="form" class="form-horizontal" method="POST" action="/blog/login">
 							<div class="form-group" >
 								<div class="col-sm-2">
-										<label for="username">User Name: </label>
+										<label for="username">User Email: </label>
 								</div>
 								<div class="col-sm-10 ">
 								<p id="form-error" style="display:none; font-size: 12px; color:red;">Enter proper format!!</p>
 								</div>
 
 								<div class="col-sm-10">
-										<input type="text" class="form-control" name="username" value="{{ username }}" placeholder="Name !!">
+										<input type="email" class="form-control" name="username" value="{{ username }}" placeholder="Email">
 								</div>
 							</div>
 
@@ -164,20 +166,21 @@
 
 
 							<div class="form-group col-sm-12  col-sm-offset-4">
-								<button type="submit" >Submit</button>
+								<button class="btn btn-primary" type="submit" >Submit</button>
 							</div>
 
 
 
 
 					</form>
-                     <div class="form-group col-sm-8 col-sm-offset-4">
+                    <div class="row"><div class="form-group col-sm-4">
                                 <h3>
                                     <a href="/blog/register" style="text-decoration: none">
                                         <button class="btn btn-warning">Register Here</button>
                                     </a>
                                 </h3>
-                            </div>
+                            </div></div>
+
 			</div>
 
       <div class="modal-footer">

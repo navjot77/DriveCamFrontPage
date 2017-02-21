@@ -3,10 +3,8 @@
  */
 
  $(document).ready(function () {
-
 $(".grid1").mouseenter(function(){
-
-    $(this).next().css({"height":"100%"});
+    $(this).next().css({"height":"70%"});
 
 });
 $(".grid1").mouseleave(function(){

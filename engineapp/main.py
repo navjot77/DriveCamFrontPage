@@ -445,8 +445,15 @@ class MainBlogPage(MainHandler):
         comments = db.GqlQuery("select * from COMMENT")
         per_comments = db.GqlQuery("select * from PER_COMMENT")
         blogs = blogs_all.fetch(limit=10)
-        user_logged=self.user
 
+
+
+
+
+
+        uid = self.read_secure_cookie('user_id')
+        user = User.by_id(int(self.uid))
+        user_logged = user.user_name
         self.render('blog.html', blogs=blogs, like=likes,
                     comments=comments, like_error=like_error,
                     like_error_id=like_error_id,
@@ -504,15 +511,10 @@ class OpenBlog(MainHandler):
                     user_logged=user_logged)
 
 
-
-
-
-
     def get(self):
         if self.user:
             post_id = self.request.get("post_id")
-            logging.info("-----------------------------------------")
-            logging.info(post_id)
+
             self.render_front(post_id)
 
         else:
@@ -523,9 +525,10 @@ class OpenBlog(MainHandler):
         if self.user:
             post_id = self.request.get("post_id")
 
-            logging.info(post_id)
             comment_clicked = False
             if post_id:
+
+                logging.info("--------------------Inside Post_id")
                 comment_clicked = True
                 s = Blog.get_by_id(int(post_id))
     # check wether author of blog is current user, if so dnt let him comment
@@ -534,11 +537,8 @@ class OpenBlog(MainHandler):
 
                     comment_error = """"
                     Owner of Blog not authorize to comment on his/her blog"""
-                    blogs = db.GqlQuery(
-                        "select * from Blog order by created desc ")
-                    likes = db.GqlQuery("select * from LIKE")
-                    comments = db.GqlQuery("select * from COMMENT")
-                    self.render_front(
+
+                    self.render_front(post_id=post_id,
                         comment_error=comment_error,
                         comment_error_id=comment_error_id,
                         current_user=self.user.user_name)
@@ -549,6 +549,7 @@ class OpenBlog(MainHandler):
             like_error_id = ""
             like_error = ""
             if like_button_id:
+                logging.info("--------------------Inside Like_id")
                 s = LIKE.get_by_id(int(like_button_id))
 
                 # check wether author of blog/prviously likes the page is
@@ -559,7 +560,7 @@ class OpenBlog(MainHandler):
                     Error: Author not authorize to like own Blog.
                       Or You likes the blog already"""
                     like_error_id = int(like_button_id)
-                    self.render_front(
+                    self.render_front(post_id=post_id,
                         like_error=like_error, like_error_id=like_error_id,
                         current_user=self.user.user_name)
                 else:
@@ -573,6 +574,7 @@ class OpenBlog(MainHandler):
 
             delete_post_id = self.request.get("delete_post_id")
             if delete_post_id:
+                logging.info("--------------------Inside delete_id")
                 s = Blog.get_by_id(int(delete_post_id))
                 if s and self.user.user_name == s.owner:
                     s.delete()
@@ -581,7 +583,7 @@ class OpenBlog(MainHandler):
                 else:
                     delete_error_id = int(delete_post_id)
                     del_error = "Only Owner is authorize to delete a blog"
-                    self.render_front(delete_error=del_error,
+                    self.render_front(delete_error=del_error, post_id=post_id,
                                       delete_error_id=delete_error_id)
 
             each_comment_id_for_edit = self.request.get(
@@ -589,6 +591,7 @@ class OpenBlog(MainHandler):
             each_comment_id_for_delete = self.request.get(
                 "each_comment_id_for_delete")
             if each_comment_id_for_edit:
+                logging.info("--------------------Inside each comment edit_id")
                 comment_obj = PER_COMMENT.get_by_id(
                     int(each_comment_id_for_edit))
                 logging.info("EDIT REQUEST")
@@ -599,9 +602,10 @@ class OpenBlog(MainHandler):
                 else:
                     comment_delete_error = \
                         "Only author of blog can EDIT the comment"
-                    self.render_front(comment_edit_error=comment_delete_error,
+                    self.render_front(comment_edit_error=comment_delete_error,post_id=post_id,
                         comment_edit_id=int(each_comment_id_for_edit))
             if each_comment_id_for_delete:
+                logging.info("--------------------Inside each comment delet_id")
                 comment_obj = PER_COMMENT.get_by_id(
                     int(each_comment_id_for_delete))
                 if comment_obj.owner_comment == self.user.user_name:
@@ -612,7 +616,7 @@ class OpenBlog(MainHandler):
                 else:
                     comment_delete_error =\
                         "Only author of blog can delete the comment"
-                self.render_front(comment_delete_error=comment_delete_error,
+                self.render_front(comment_delete_error=comment_delete_error,post_id=post_id,
                         comment_delete_id=int(each_comment_id_for_delete))
 
         else:

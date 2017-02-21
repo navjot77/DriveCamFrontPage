@@ -8,6 +8,8 @@
 
 
 
+
+
         <h1>{{ blog.subject }}</h1>
         <p>By{{ blog.owner }}</p>
 
@@ -52,17 +54,11 @@ will be getting posted, so in that case as this is only view page, we hide
             <blockquote style="margin-left: 2em">{{ each_comment.comment }}
             <p style="text-align: right;margin-right: 4em">by
                 <em>{{ each_comment.owner_comment }}</em></p>
-              <form method="post" style="margin-left: 10em; margin-top:0.1em">
-    <button name="each_comment_id_for_edit"
-            value="{{ each_comment.key().id()}}"
-            style="margin-left: 0.7em" class="glyphicon glyphicon-edit">Edit
-    </button>
-    <button name="each_comment_id_for_delete"
-            value="{{ each_comment.key().id()}}"
-            style="margin-left: 0.7em" class="glyphicon glyphicon-trash" >Delete
-    </button>
 
-    </form >
+<form method="post" style="margin-left: 10em; margin-top:0.1em">
+    <button name="each_comment_id_for_edit" value="{{ each_comment.key().id()}}" style="margin-left: 0.7em" class="glyphicon glyphicon-edit">Edit </button>
+    <button name="each_comment_id_for_delete" value="{{ each_comment.key().id()}}" style="margin-left: 0.7em" class="glyphicon glyphicon-trash" >Delete </button>
+</form >
             </blockquote>
              {% if comment_delete_id == each_comment.key().id() %}
                     <p style="color:red; margin:1em">

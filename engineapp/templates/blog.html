@@ -5,6 +5,7 @@
 <!-- Below tag is for responsive view-->
 <meta name="viewport" content="width=device-width,
 minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <link href="https://fonts.googleapis.com/css?family=Pangolin" rel="stylesheet">
 <meta charset="utf-8">
 <title>Build a portfolio site</title>
 <link rel="stylesheet"
@@ -16,17 +17,17 @@ href=
 <script
 src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js">
 </script>
+
     <link type="text/css" href="/static/blog.css" rel="stylesheet" >
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="/static/blog.js"></script>
-
-
-
 
 </head>
 <body>
 
 
-<div class="">
+
 <ul class="nav nav-pills" style="border-bottom: solid deeppink 0.3em;
    margin-top:1.5em; padding-bottom: 1em; margin-left: 2em;margin-right: 2em;">
 
@@ -35,18 +36,33 @@ src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js">
   <li class="pull-right" ><a href="/blog/newpost" class="nav-data">
       <button type="button"> Add New Post</button></a></li>
   {% if user_logged %}
-  <li role="presentation"><a href="/blog/logout">Logout</a></li>
+  <li class="pull-right"><a href="/blog/logout"  class="nav-data"><button>LogOut</button></a></li>
   {% endif %}
 </ul>
 
-
+<label class="label label-warning pull-right">Welcome {{ user_logged }}</label>
 <!-- Jinja2 template provides for loop that can be used to display
     various elements in html page -->
 
+
+
+
+<h2 style="color:saddlebrown; margin-left:3em; font-weight: bolder">Below is the List Of Latest Blogs...</h2>
+
+
+ {% set value=1 %}
 {% for blog in blogs %}
 
 
-<div class="col-sm-3 is_clicked">
+<div class="row container">
+
+<div class="col-sm-2">
+   <h1 class="">Blog {{ value }}</h1>
+{% set value= value+1 %}
+    </div>
+
+
+<div class="col-sm-4 is_clicked">
     <div class="blogBlock grid1">
     <h1>{{ blog.subject }}</h1>
     </div>
@@ -57,23 +73,22 @@ src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js">
         <p>Created {{ blog.created }} </p>
       </div>
   </div>
+
+
+</div>
+<div class="col-sm-4">
+    <div >
+         <form action="/blog/getBlog" method="get" style="margin-top: 10%">
+            <button class='btn btn-primary' name="post_id" value="{{ blog.key().id() }}" >Read More </button></a>
+        </form>
+    </div>
 </div>
 
- <form action="/blog/getBlog" method="get">
-    <button  name="post_id" value="{{ blog.key().id() }}" >Read More.. </button></a>
-</form>
-
-
-
+</div>
 
 {%  endfor %}
 
 
-
-
-
-
-
-    <script src="http://cdn.jsdelivr.net/mojs/latest/mo.min.js"></script>
+<script src="http://cdn.jsdelivr.net/mojs/latest/mo.min.js"></script>
 </body>
 </html>

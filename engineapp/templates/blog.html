@@ -17,6 +17,7 @@ href=
 src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js">
 </script>
     <link type="text/css" href="/static/blog.css" rel="stylesheet" >
+    <script src="/static/blog.js"></script>
 </head>
 <body>
 
@@ -40,12 +41,13 @@ src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js">
 <div class="row">
 {% for blog in blogs %}
 
-    <div class="col-sm-4 blogBlock">
+    <div class="col-sm-4 blogBlock" id="grid1">
     <h1>{{ blog.subject }}</h1>
      <p>By{{ blog.owner }}</p>
     <p>Created {{ blog.created }} </p>
 
-    <a href="#" data-toggle="modal" data-target="#myModalLogin">Read More </a>
+
+<a href="#" data-toggle="modal" data-target="#myModalLogin">Read More </a>
 
 
 
@@ -190,18 +192,19 @@ will be getting posted, so in that case as this is only view page, we hide
     </div>
   </div>
 </div>
-    
-
-
 
 
 
 </div>
 
 
-
-
 {%  endfor %}
+</div>
+     <div id="overlay_grid" >
+  			<div class="overlay_grid_content">Project 1</div></div>
+  		</div>
+
+
 
 </div>
 

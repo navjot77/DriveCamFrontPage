@@ -19,11 +19,29 @@ background-size: 100% 100%;
 .blogBlock{
     background-color: lightpink;
     margin: 1em;
+    border: 0.2em solid black;
+    box-shadow: 1em 0.2em lightcoral;
+    width: 30%;
+    height: 30%;
+}
 
+#overlay_grid, #overlay_grid2, #overlay_grid3{
+    height: 0%;
+    width: 400px;
+    position: absolute;
+    z-index: 1;
+	top:0px;
+    background-color: rgba(0,0,0, 0.8);
+    overflow-y: hidden;
+    transition: 0.5s;
 
 }
 
-.blogContent{
-
-    display:None;
+.overlay-content, .overlay_grid_content, .overlay_grid_content2, .overlay_grid_content3{
+    position: relative;
+    color:white;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
 }

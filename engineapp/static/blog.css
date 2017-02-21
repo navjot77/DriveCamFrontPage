@@ -21,13 +21,23 @@ background-size: 100% 100%;
     margin: 1em;
     border: 0.2em solid black;
     box-shadow: 1em 0.2em lightcoral;
-    width: 30%;
-    height: 30%;
+    width: 100%;
+    height: 100%;
 }
 
-#overlay_grid, #overlay_grid2, #overlay_grid3{
+.blogContent{
+
+    display:None;
+}
+
+.onclicked{
+    display: None;
+}
+
+
+#overlay_grid{
     height: 0%;
-    width: 400px;
+    width: 100%;
     position: absolute;
     z-index: 1;
 	top:0px;
@@ -37,7 +47,7 @@ background-size: 100% 100%;
 
 }
 
-.overlay-content, .overlay_grid_content, .overlay_grid_content2, .overlay_grid_content3{
+.overlay-content{
     position: relative;
     color:white;
     top: 25%;

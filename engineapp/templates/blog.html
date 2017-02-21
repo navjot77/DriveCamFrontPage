@@ -18,11 +18,15 @@ src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js">
 </script>
     <link type="text/css" href="/static/blog.css" rel="stylesheet" >
     <script src="/static/blog.js"></script>
+
+
+
+
 </head>
 <body>
 
 
-<div class="container">
+<div class="">
 <ul class="nav nav-pills" style="border-bottom: solid deeppink 0.3em;
    margin-top:1.5em; padding-bottom: 1em; margin-left: 2em;margin-right: 2em;">
 
@@ -38,186 +42,38 @@ src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js">
 
 <!-- Jinja2 template provides for loop that can be used to display
     various elements in html page -->
-<div class="row">
+
 {% for blog in blogs %}
 
-    <div class="col-sm-4 blogBlock" id="grid1">
+
+<div class="col-sm-3 is_clicked">
+    <div class="blogBlock grid1">
     <h1>{{ blog.subject }}</h1>
-     <p>By{{ blog.owner }}</p>
-    <p>Created {{ blog.created }} </p>
-
-
-<a href="#" data-toggle="modal" data-target="#myModalLogin">Read More </a>
-
-
-
-<div class="modal" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel1">Blog/h4>
-      </div>
-      <div class="modal-body">
-
-
-           <h1>{{ blog.subject }}</h1>
-     <p>By{{ blog.owner }}</p>
-
-    <blockquote style="margin-left: 0.5em">{{ blog.blog }}</blockquote>
-
-    <form method="post">
-    {% for like in like %}
-        {% if like.c_post_id == blog.key().id() %}
-<!--If user entered new blog, then a new page will be rendered to view what
-will be getting posted, so in that case as this is only view page, we hide
- like, comment and edit  buttons  else if user clicks them : error will be
- generated-->
-            {% if newblog %}
-                <input type="hidden">
-            {% else %}
-                <button name="like_button_id" value="{{like.key().id()}}"
-                        style="margin-left: 1em">LIKE {{ like.c_likes }}</button>
-            {% endif %}
-            {% if like_error_id == like.key().id() %}
-                <p style="color:red; margin:1em">{{ like_error }}</p>
-            {% endif %}
-        {% endif %}
-    {% endfor %}
-    {% set check_comments = [] %}
- <!-- This check is to see wether main.py sends error message and error id
- if so, then we only have to display to corresponding blog not all so
- we will be seeing comment_error_id which will be blog id for which
- error is generated-->
-    {% if comment_error_id == blog.key().id() %}
-        <p style="color:red; margin:1em">{{ comment_error }}
-        </p>
-    {% endif %}
-
-       </form>
-
-    {% for each_comment in each_comment %}
-
-        {% if each_comment.per_comment_id == blog.key().id() %}
-
-            {% if check_comments.append(1) %}
-            {% endif %}
-            <blockquote style="margin-left: 2em">{{ each_comment.comment }}
-            <p style="text-align: right;margin-right: 4em">by
-                <em>{{ each_comment.owner_comment }}</em></p>
-              <form method="post" style="margin-left: 10em; margin-top:0.1em">
-    <button name="each_comment_id_for_edit"
-            value="{{ each_comment.key().id()}}"
-            style="margin-left: 0.7em" class="glyphicon glyphicon-edit">Edit
-    </button>
-    <button name="each_comment_id_for_delete"
-            value="{{ each_comment.key().id()}}"
-            style="margin-left: 0.7em" class="glyphicon glyphicon-trash" >Delete
-    </button>
-
-    </form >
-            </blockquote>
-             {% if comment_delete_id == each_comment.key().id() %}
-                    <p style="color:red; margin:1em">
-                        {{ comment_delete_error }}
-                     </p>
-                    {% endif %}
-
-             {% if comment_edit_id == each_comment.key().id() %}
-                    <p style="color:red; margin:1em">
-                        {{ comment_edit_error }}
-                     </p>
-                    {% endif %}
-        {% endif %}
-        {% endfor  %}
-
-    {% if check_comments |count == 0 %}
-    <blockquote style="margin-left:2em">
-        No Comments Yet, click Comment to add
-    </blockquote>
-    {% endif %}
-    <form method="post" action="/blog/edit">
-    <button name="post_id"
-            value="{{ blog.key().id()}}" style="margin-left: 0.7em">
-        EDIT
-    </button>
-    </form >
-
-     {% if newblog %}
-         <input type="hidden">
-
-     {% else %}
-
-<!--If user entered new blog, then a new page will be rendered to view what
-will be getting posted, so in that case as this is only view page, we hide
- like, comment and edit  buttons  else if user clicks them : error will be
- generated-->
- <form method="post">
-
-        <button name="post_id" value="{{ blog.key().id()}}"
-                style="margin-top: 1em; margin-left: 0.7em" >Comment</button>
-
-    </form>
-
-    <form method="post">
-     <button name="delete_post_id" value="{{ blog.key().id()}}"
-             style="margin-top: 1em; margin-left: 0.7em" >Delete</button>
-    </form>
-
-    {% if delete_error_id == blog.key().id() %}
-        <p style="color:red; margin:1em">{{ delete_error }}
-        </p>
-    {% endif %}
-    {% endif %}
-
-    {% if newblog %}
-        <a href="/blog">
-            <p class="btn btn-primary"
-               style="margin-top: 4em; margin-left: 1em">
-                MAIN PAGE
-            </p>
-        </a>
-    {% endif %}
-
-
-    <hr>
-
-
-</div>
-
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
     </div>
+
+  <div id="overlay_grid">
+      <div class="overlay-content">
+          <p>By{{ blog.owner }}</p>
+        <p>Created {{ blog.created }} </p>
+      </div>
   </div>
 </div>
 
+ <form action="/blog/getBlog" method="get">
+    <button  name="post_id" value="{{ blog.key().id() }}" >Read More.. </button></a>
+</form>
 
 
-</div>
 
 
 {%  endfor %}
-</div>
-     <div id="overlay_grid" >
-  			<div class="overlay_grid_content">Project 1</div></div>
-  		</div>
-
-
-
-</div>
 
 
 
 
 
 
-</div>
 
-
-
-
-
+    <script src="http://cdn.jsdelivr.net/mojs/latest/mo.min.js"></script>
 </body>
 </html>

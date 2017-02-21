@@ -466,6 +466,59 @@ class MainBlogPage(MainHandler):
     def get(self):
             self.render_front()
 
+
+
+
+class OpenBlog(MainHandler):
+
+
+    def render_front(self, post_id, like_error="",
+                     comment_error="",
+                     like_error_id="",
+                     comment_error_id="", current_user="", delete_error="",
+                     delete_error_id="", comment_delete_error="",
+                     comment_delete_id="",
+                     comment_edit_error="", comment_edit_id=""):
+
+        s = Blog.get_by_id(int(post_id))
+
+        likes = db.GqlQuery("select * from LIKE")
+        comments = db.GqlQuery("select * from COMMENT")
+        per_comments = db.GqlQuery("select * from PER_COMMENT")
+
+        user_logged=self.user
+
+        self.render('getBlog.html', blog=s, like=likes,
+                    comments=comments, like_error=like_error,
+                    like_error_id=like_error_id,
+                    comment_error=comment_error,
+                    comment_error_id=comment_error_id,
+                    delete_error=delete_error,
+                    delete_error_id=delete_error_id,
+                    current_user=current_user,
+                    each_comment=per_comments,
+                    comment_delete_error=comment_delete_error,
+                    comment_delete_id=comment_delete_id,
+                    comment_edit_error=comment_edit_error,
+                    comment_edit_id=comment_edit_id,
+                    user_logged=user_logged)
+
+
+
+
+
+
+    def get(self):
+        if self.user:
+            post_id = self.request.get("post_id")
+            logging.info("-----------------------------------------")
+            logging.info(post_id)
+            self.render_front(post_id)
+
+        else:
+            self.redirect('/blog/login')
+
+
     def post(self):
         if self.user:
             post_id = self.request.get("post_id")
@@ -566,6 +619,7 @@ class MainBlogPage(MainHandler):
             self.redirect('/blog/login')
 
 
+
 class EditBlog(MainHandler):
 
     def render_front(self, post_id):
@@ -656,6 +710,8 @@ class AddComment(MainHandler):
             self.redirect('/blog/login')
 
 
+
+
 class EditComment(MainBlogPage):
 
     def get(self):
@@ -689,6 +745,7 @@ app = webapp2.WSGIApplication([('/blog/newpost', BlogPage),
                                ('/blog/(\d+)', Permalink),
                                ('/blog', MainBlogPage),
                                ('/', MainWebPage),
+                               ('/blog/getBlog',OpenBlog),
                                ('/blog/register', Register),
                                ('/blog/welcome', ThanksHandler),
                                ('/blog/login', Login),

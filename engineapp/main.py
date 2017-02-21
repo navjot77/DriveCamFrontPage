@@ -15,6 +15,10 @@ import random
 from google.appengine.ext.db import metadata
 
 from google.appengine.ext import ndb
+from google.appengine.api import mail
+from google.appengine.api import app_identity
+
+import httplib2
 
 
 
@@ -743,6 +747,51 @@ class EditComment(MainBlogPage):
         else:
             self.redirect('/blog/login')
 
+class ContactForm(MainHandler):
+    def get(self):
+        self.redirect('/')
+    def post(self):
+        email=self.request.get("email")
+
+
+
+def send_approved_mail():
+    # [START send_mail]
+
+    MAILGUN_DOMAIN_NAME = 'Mailgun Sandbox <postmaster@sandbox79a3cc42a8ef4bbbb472227da1f6772b.mailgun.org>'
+    # Your Mailgun API key
+    MAILGUN_API_KEY = 'key-794f608b617e7d0d6110ab9e001c351c'
+
+    # [START simple_message]
+    def send_simple_message():
+        http = httplib2.Http()
+        http.add_credentials('api', MAILGUN_API_KEY)
+
+        url = 'https://api.mailgun.net/v3/sandbox79a3cc42a8ef4bbbb472227da1f6772b.mailgun.org/messages'
+        data = {
+            'from': 'Mailgun Sandbox <postmaster@sandbox79a3cc42a8ef4bbbb472227da1f6772b.mailgun.org>',
+            'to': 'navjot.chakal@yahoo.com',
+            'subject': 'This is an example email from Mailgun',
+            'text': 'Test message from Mailgun'
+        }
+
+        resp, content = http.request(
+            url, 'POST', urlencode(data),
+            headers={"Content-Type": "application/x-www-form-urlencoded"})
+
+        if resp.status != 200:
+            raise RuntimeError(
+                'Mailgun API error: {} {}'.format(resp.status, content))
+
+
+
+class SendMailHandler(webapp2.RequestHandler):
+    def get(self):
+        send_approved_mail()
+        self.response.content_type = 'text/plain'
+        self.response.write('Sent an email to Navjot.')
+
+
 
 app = webapp2.WSGIApplication([('/blog/newpost', BlogPage),
                                ('/generateCode',GenerateCode),
@@ -760,4 +809,5 @@ app = webapp2.WSGIApplication([('/blog/newpost', BlogPage),
                                ('/blog/addcomment', AddComment),
                                ('/blog/comment', AddingComment),
                                ('/blog/editComment', EditComment),
+                               ('/contactForm',SendMailHandler),
                                ], debug=True)

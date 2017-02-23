@@ -17,6 +17,7 @@ from google.appengine.ext.db import metadata
 from google.appengine.ext import ndb
 from google.appengine.api import mail
 from google.appengine.api import app_identity
+from urllib import urlencode
 
 import httplib2
 
@@ -321,7 +322,7 @@ class Login(MainHandler):
             self.redirect('/')
 
     def post(self):
-        #logging.info("Inside POST ---------------------")
+        logging.info("Inside POST LOGIN---------------------")
         self.username = self.request.get('username')
         self.password = self.request.get('password')
         u = User.login(self.username, self.password)
@@ -755,15 +756,29 @@ class ContactForm(MainHandler):
 
 
 
-def send_approved_mail():
-    # [START send_mail]
+class GetGps(MainHandler):
+    def post(self):
+        logging.info("----------------------GPS post")
+        if self.request.headers['authorization'] == '11223':
 
-    MAILGUN_DOMAIN_NAME = 'Mailgun Sandbox <postmaster@sandbox79a3cc42a8ef4bbbb472227da1f6772b.mailgun.org>'
-    # Your Mailgun API key
-    MAILGUN_API_KEY = 'key-794f608b617e7d0d6110ab9e001c351c'
+            data_x=self.request.get("x")
+            data_y = self.request.get("y")
+            logging.info(data_x+" AND "+data_y)
+            self.request.response.write("Thanks")
+        else:
+            logging.info("Failed AUth")
+    def get(self):
+        logging.info("----------------------GPS get")
 
-    # [START simple_message]
-    def send_simple_message():
+
+
+class SendMailHandler(webapp2.RequestHandler):
+    def get(self):
+        email=self.request.get("email")
+        phone=self.request.get("phone")
+        comment=self.request.get("comment")
+        MAILGUN_API_KEY = 'key-794f608b617e7d0d6110ab9e001c351c'
+
         http = httplib2.Http()
         http.add_credentials('api', MAILGUN_API_KEY)
 
@@ -771,8 +786,13 @@ def send_approved_mail():
         data = {
             'from': 'Mailgun Sandbox <postmaster@sandbox79a3cc42a8ef4bbbb472227da1f6772b.mailgun.org>',
             'to': 'navjot.chakal@yahoo.com',
-            'subject': 'This is an example email from Mailgun',
-            'text': 'Test message from Mailgun'
+            'subject':' Got MESSAGE from Drive Pro',
+            'text': '''
+            Received Query From '''+email+'''
+            Contact Number : '''+phone+
+            '''
+            And the message is
+            '''+comment
         }
 
         resp, content = http.request(
@@ -783,13 +803,7 @@ def send_approved_mail():
             raise RuntimeError(
                 'Mailgun API error: {} {}'.format(resp.status, content))
 
-
-
-class SendMailHandler(webapp2.RequestHandler):
-    def get(self):
-        send_approved_mail()
-        self.response.content_type = 'text/plain'
-        self.response.write('Sent an email to Navjot.')
+        self.redirect('/')
 
 
 
@@ -810,4 +824,5 @@ app = webapp2.WSGIApplication([('/blog/newpost', BlogPage),
                                ('/blog/comment', AddingComment),
                                ('/blog/editComment', EditComment),
                                ('/contactForm',SendMailHandler),
+                               ('/getGPS',GetGps)
                                ], debug=True)

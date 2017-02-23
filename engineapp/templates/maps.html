@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+<title>Neighborhood Map</title>
+<meta name="viewport" content="width=device-width,
+minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+<link rel="stylesheet"
+ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<header style="text-align: center; font-size: 2.5em;">Track Vehicle</header>
+<div class="jumbotron">
+    <div class="row" style="margin: 0px;">
+    <div class="col-sm-4"  style="margin: 1em">
+        <!-- When something is typed, on keyUp event function will be
+        called in app.js and list gets update with show variable set to True/
+        False based upon if string matches restaurant Name-->
+        <h3 ><input style="border:0.05em solid red ;width:30vw"
+                    data-bind="value: query, valueUpdate:'keyup'"
+                    placeholder="Type Here">
+        </h3>
+
+        <ul class="nav nav-pills nav-stacked" data-bind="foreach: list">
+         <li class="btn btn-success" role="presentation"
+             data-bind="text: name, visible: show, click:gotClicked">
+         </li>
+        </ul>
+
+    </div>
+    <div class="col-sm-7">
+        <div id="map"  style="height: 67vh">
+        </div>
+    </div>
+    </div>
+</div>
+<footer style="margin-left: 1em"> Pro Drive Cam Project</footer>
+<!-- jQuery library -->
+<script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+</script>
+<script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+</script>
+<script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js" >
+</script>
+<script src="/static/maps.js"></script>
+<script async defer type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyC7RttZ8V20gh-
+        hK4qog29GCiPRwfRFF4I&callback=googleMap"
+        onerror='error()'>
+</script>
+</body>
+</html>

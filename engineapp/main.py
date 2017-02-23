@@ -34,6 +34,13 @@ EMAIL_RE = re.compile(r"^[\S]+@[\S]+.[\S]+$")
 secret = 'Navjot'
 
 
+
+class VehicleLocation(ndb.Model):
+    lat=ndb.FloatProperty()
+    long=ndb.FloatProperty()
+    name=ndb.StringProperty()
+
+
 class UserCode(ndb.Model):
     """User-Code profile"""
     code=ndb.IntegerProperty()
@@ -759,10 +766,18 @@ class ContactForm(MainHandler):
 class GetGps(MainHandler):
     def post(self):
         logging.info("----------------------GPS post")
-        if self.request.headers['authorization'] == '11223':
-
+        if self.request.headers['authorization'] == '112233':
             data_x=self.request.get("x")
             data_y = self.request.get("y")
+            vehicle=self.request.get("vehicle")
+            find_vehicle=VehicleLocation.query(VehicleLocation.name==vehicle).get()
+            if find_vehicle:
+                find_vehicle.lat=float(data_x)
+                find_vehicle.long=float(data_y)
+                find_vehicle.put()
+            else:
+                obj=VehicleLocation(lat=float(data_x),long=float(data_y),name=vehicle)
+                obj.put()
             logging.info(data_x+" AND "+data_y)
             self.request.response.write("Thanks")
         else:
@@ -806,6 +821,13 @@ class SendMailHandler(webapp2.RequestHandler):
         self.redirect('/')
 
 
+class ShowMaps(MainHandler):
+
+    def get(self):
+        all_vehicles=VehicleLocation.query().fetch()
+        logging.info(all_vehicles)
+        self.render('maps.html')
+
 
 app = webapp2.WSGIApplication([('/blog/newpost', BlogPage),
                                ('/generateCode',GenerateCode),
@@ -824,5 +846,6 @@ app = webapp2.WSGIApplication([('/blog/newpost', BlogPage),
                                ('/blog/comment', AddingComment),
                                ('/blog/editComment', EditComment),
                                ('/contactForm',SendMailHandler),
-                               ('/getGPS',GetGps)
+                               ('/getGPS',GetGps),
+                               ('/navigation',ShowMaps)
                                ], debug=True)

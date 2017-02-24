@@ -20,8 +20,8 @@ from google.appengine.api import app_identity
 from urllib import urlencode
 
 import httplib2
-
-
+from collections import defaultdict
+import json
 
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
@@ -36,8 +36,8 @@ secret = 'Navjot'
 
 
 class VehicleLocation(ndb.Model):
-    lat=ndb.FloatProperty()
-    long=ndb.FloatProperty()
+    lat=ndb.StringProperty()
+    long=ndb.StringProperty()
     name=ndb.StringProperty()
 
 
@@ -772,11 +772,11 @@ class GetGps(MainHandler):
             vehicle=self.request.get("vehicle")
             find_vehicle=VehicleLocation.query(VehicleLocation.name==vehicle).get()
             if find_vehicle:
-                find_vehicle.lat=float(data_x)
-                find_vehicle.long=float(data_y)
+                find_vehicle.lat=data_x
+                find_vehicle.long=data_y
                 find_vehicle.put()
             else:
-                obj=VehicleLocation(lat=float(data_x),long=float(data_y),name=vehicle)
+                obj=VehicleLocation(lat=data_x,long=data_y,name=vehicle)
                 obj.put()
             logging.info(data_x+" AND "+data_y)
             self.request.response.write("Thanks")
@@ -825,8 +825,22 @@ class ShowMaps(MainHandler):
 
     def get(self):
         all_vehicles=VehicleLocation.query().fetch()
-        logging.info(all_vehicles)
-        self.render('maps.html')
+        #logging.info(all_vehicles)
+
+        data={}
+
+
+        l=[]
+        json_data=""
+        for i in all_vehicles:
+
+            data['title']=i.name
+            data['location']={'lat':float(i.lat),'lng':float(i.long)}
+            #data['long']=i.long
+            json_data=json_data+json.dumps(data)+"&"
+
+        logging.info(json_data)
+        self.render('maps.html',items=json_data)
 
 
 app = webapp2.WSGIApplication([('/blog/newpost', BlogPage),

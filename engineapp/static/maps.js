@@ -3,10 +3,15 @@
  */
 
 
+// [VehicleLocation(key=Key('VehicleLocation', 4537134732017664), lat=37.376393,
+// long=121.880617, name=u'vehicle102'),
+// VehicleLocation(key=Key('VehicleLocation', 6736157987569664),
+// lat=37.376393, long=121.880617, name=u'vehicle101')]
+
 /*List of locations. Contains name of Restaurant, linkedId: Here is id which
 is used later in ajax call to get restaurant related data from
 FourSquare*/
-var locations = [
+/*var locations = [
     {
     'title': 'Vehicle 101',
     'location': {
@@ -14,7 +19,22 @@ var locations = [
         lng: -121.889771
     }
 }
-];
+];*/
+
+//var name = $("script[src*='static/maps.js']").attr('src').split(',');
+var locations = document.getElementById("helper").getAttribute("data-name");
+//name1=name1.replace(/\[/g,'');
+//name1=name1.replace(/\]/g,'');
+//name1=name1.replace(/u/g,'');
+
+
+locations=locations.split('&');
+locations.pop()
+
+for (var i=0; i<locations.length; i++){
+   locations[i]=JSON.parse(locations[i]);
+}
+console.log(locations)
 
 // global variables.
 var map, infowindow;

@@ -67,7 +67,7 @@ var model= function (data) {
   self.gotClicked=function(){
     // Resetting the zoom and center in case User navigates to other in maps.
  map.setCenter(gCenter);
-  map.setZoom(10);
+  map.setZoom(3);
    if (self.marker.getAnimation() !== null) {
       self.marker.setAnimation(null);
   }
@@ -141,7 +141,7 @@ map = new google.maps.Map(document.getElementById('map'), {
         lat: 37.334273,
         lng: -121.889771
         },
-    zoom: 12,
+    zoom: 3,
     mapTypeControl: false
     });
 

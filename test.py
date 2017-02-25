@@ -18,7 +18,7 @@ url='http://localhost:8080/getGPS'
 username='t.chakal@yahoo.com'
 password='avjot'
 
-values = dict(x='37.376393',y='-121.880617',vehicle='vehicle101')
+values = dict(x='67.376393',y='-121.880617',vehicle='vehicle103')
 
 
 

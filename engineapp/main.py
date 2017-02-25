@@ -524,6 +524,7 @@ class OpenBlog(MainHandler):
 
 
     def get(self):
+        logging.info("***********Inside GET of OpenBlog")
         if self.user:
             post_id = self.request.get("post_id")
 
@@ -534,28 +535,31 @@ class OpenBlog(MainHandler):
 
 
     def post(self):
+        logging.info("***********Inside POST of OpenBlog")
+
         if self.user:
             post_id = self.request.get("post_id")
+            comment_post_id=self.request.get("comment_post_id")
 
             comment_clicked = False
-            if post_id:
+            if comment_post_id:
 
-                logging.info("--------------------Inside Post_id")
+                logging.info("--------------------Inside Post_id %s"%(comment_post_id))
                 comment_clicked = True
-                s = Blog.get_by_id(int(post_id))
+                s = Blog.get_by_id(int(comment_post_id))
     # check wether author of blog is current user, if so dnt let him comment
                 if self.user.user_name == s.owner:
-                    comment_error_id = int(post_id)
+                    comment_error_id = int(comment_post_id)
 
                     comment_error = """"
                     Owner of Blog not authorize to comment on his/her blog"""
 
-                    self.render_front(post_id=post_id,
+                    self.render_front(post_id=comment_post_id,
                         comment_error=comment_error,
                         comment_error_id=comment_error_id,
                         current_user=self.user.user_name)
                 else:
-                    self.redirect('/blog/addcomment?post_id=' + post_id)
+                    self.redirect('/blog/addcomment?post_id=' + comment_post_id)
 
             like_button_id = self.request.get("like_button_id")
             like_error_id = ""
@@ -595,7 +599,7 @@ class OpenBlog(MainHandler):
                 else:
                     delete_error_id = int(delete_post_id)
                     del_error = "Only Owner is authorize to delete a blog"
-                    self.render_front(delete_error=del_error, post_id=post_id,
+                    self.render_front(delete_error=del_error, post_id=delete_post_id,
                                       delete_error_id=delete_error_id)
 
             each_comment_id_for_edit = self.request.get(
@@ -610,7 +614,7 @@ class OpenBlog(MainHandler):
                 if comment_obj.owner_comment == self.user.user_name:
                     self.redirect(
                         '/blog/editComment?comment_id=' +
-                        each_comment_id_for_edit)
+                        each_comment_id_for_edit+'&blog_id='+post_id)
                 else:
                     comment_delete_error = \
                         "Only author of blog can EDIT the comment"
@@ -623,7 +627,10 @@ class OpenBlog(MainHandler):
                 if comment_obj.owner_comment == self.user.user_name:
                     comment_obj.delete()
                     comment_obj.delete()
-                    self.redirect('/blog')
+
+
+
+
                     comment_delete_error = ""
                 else:
                     comment_delete_error =\
@@ -655,8 +662,32 @@ class EditBlog(MainHandler):
 
     def post(self):
         if self.user:
+            logging.info("***********INSIDE EditBlog POST")
+
             post_id = self.request.get("post_id")
-            self.redirect('/blog/edit?post_id='+post_id)
+
+            post = Blog.get_by_id(int(post_id))
+            if (self.user.user_name == post.owner):
+                self.render_front(post_id)
+            else:
+
+                s = Blog.get_by_id(int(post_id))
+
+                likes = db.GqlQuery("select * from LIKE")
+                comments = db.GqlQuery("select * from COMMENT")
+                per_comments = db.GqlQuery("select * from PER_COMMENT")
+
+                user_logged = self.user
+
+                self.render('getBlog.html', blog=s, like=likes,
+                            comments=comments,
+
+                            each_comment=per_comments,
+                            user_logged=user_logged)
+
+                #self.redirect('/blog')
+
+            #self.redirect('/blog/edit?post_id='+post_id)
         else:
             self.redirect('/blog/login')
 
@@ -703,7 +734,23 @@ class AddingComment(MainHandler):
                                                comment=comment)
                     each_comment.put()
                     each_comment.put()
-                    self.redirect('/blog')
+
+                    s = Blog.get_by_id(int(blog_id))
+
+                    likes = db.GqlQuery("select * from LIKE")
+                    comments = db.GqlQuery("select * from COMMENT")
+                    per_comments = db.GqlQuery("select * from PER_COMMENT")
+
+                    user_logged = self.user
+
+                    self.render('getBlog.html', blog=s, like=likes,
+                                comments=comments,
+
+                                each_comment=per_comments,
+                                user_logged=user_logged)
+
+
+
 
             else:
                 self.redirect('/blog/addcomment?post_id=' + blog_id)
@@ -732,11 +779,12 @@ class EditComment(MainBlogPage):
 
     def get(self):
         if self.user:
+            blog_id=self.request.get("blog_id")
             comment_id = self.request.get("comment_id")
             comment_obj = PER_COMMENT.get_by_id(int(comment_id))
             if comment_obj:
                 self.render('edit-comment.html',
-                            comment_obj=comment_obj)
+                            comment_obj=comment_obj, blog_id=blog_id)
             else:
                 self.redirect('/blog')
         else:
@@ -744,6 +792,7 @@ class EditComment(MainBlogPage):
 
     def post(self):
         if self.user:
+            blog_id = self.request.get("post_id")
             comment = self.request.get("comment")
             comment_id = self.request.get("comment_id")
             comment_obj = PER_COMMENT.get_by_id(int(comment_id))
@@ -751,7 +800,21 @@ class EditComment(MainBlogPage):
                 comment_obj.comment = comment
                 comment_obj.put()
                 comment_obj.put()
-                self.redirect('/blog')
+
+                s = Blog.get_by_id(int(blog_id))
+
+                likes = db.GqlQuery("select * from LIKE")
+                comments = db.GqlQuery("select * from COMMENT")
+                per_comments = db.GqlQuery("select * from PER_COMMENT")
+
+                user_logged = self.user
+
+                self.render('getBlog.html', blog=s, like=likes,
+                            comments=comments,
+
+                            each_comment=per_comments,
+                            user_logged=user_logged)
+
         else:
             self.redirect('/blog/login')
 

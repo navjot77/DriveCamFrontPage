@@ -13,13 +13,16 @@
 </textarea>
         <input type="hidden"
                name="comment_id" value="{{ comment_obj.key().id() }}">
+
+    <input type="hidden" name="post_id" value="{{ blog_id }}" />
         <input type="submit">
     </form>
 
-<h2>
-    <a href="/blog" style="background-color: khaki; color:red;font-size:0.5em">
+<h2><form action="/blog/getBlog"  method="get">
+    <button type="submit" name="post_id" value="{{ blog_id }}" style="background-color: khaki; color:red;font-size:0.5em">
         Cancel
-    </a>
+    </button>
+</form>
 </h2>
 
 {%  endblock %}

@@ -33,9 +33,12 @@ src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js">
             <input type="submit">
         </form>
         <h2>
-            <a href="/blog" style="background-color: khaki; color:red;font-size:0.5em">
-                Cancel
-            </a>
+            <h2><form action="/blog/getBlog"  method="get">
+    <button type="submit" name="post_id" value="{{ s.key().id() }}" style="background-color: khaki; color:red;font-size:0.5em">
+        Cancel
+    </button>
+            </form>
+
         </h2>
      </body>
 </html>

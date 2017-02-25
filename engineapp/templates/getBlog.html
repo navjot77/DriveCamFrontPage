@@ -9,13 +9,16 @@
 
 
 
-
         <h1>{{ blog.subject }}</h1>
         <p>By{{ blog.owner }}</p>
 
     <blockquote style="margin-left: 0.5em">{{ blog.blog }}</blockquote>
 
-    <form method="post">
+        <input type="hidden" name="post_id" value="{{ blog.key().id() }}" />
+
+    <form method="post" action="/blog/getBlog">
+     <input type="hidden" name="post_id" value="{{ blog.key().id() }}" />
+
     {% for like in like %}
         {% if like.c_post_id == blog.key().id() %}
 <!--If user entered new blog, then a new page will be rendered to view what
@@ -45,6 +48,10 @@ will be getting posted, so in that case as this is only view page, we hide
 
        </form>
 
+
+
+
+
     {% for each_comment in each_comment %}
 
         {% if each_comment.per_comment_id == blog.key().id() %}
@@ -55,7 +62,8 @@ will be getting posted, so in that case as this is only view page, we hide
             <p style="text-align: right;margin-right: 4em">by
                 <em>{{ each_comment.owner_comment }}</em></p>
 
-<form method="post" style="margin-left: 10em; margin-top:0.1em">
+<form method="post" style="margin-left: 10em; margin-top:0.1em" action="/blog/getBlog">
+    <input type="hidden" name="post_id" value="{{ blog.key().id() }}" />
     <button name="each_comment_id_for_edit" value="{{ each_comment.key().id()}}" style="margin-left: 0.7em" class="glyphicon glyphicon-edit">Edit </button>
     <button name="each_comment_id_for_delete" value="{{ each_comment.key().id()}}" style="margin-left: 0.7em" class="glyphicon glyphicon-trash" >Delete </button>
 </form >
@@ -82,7 +90,7 @@ will be getting posted, so in that case as this is only view page, we hide
     <form method="post" action="/blog/edit">
     <button name="post_id"
             value="{{ blog.key().id()}}" style="margin-left: 0.7em">
-        EDIT
+        EDIT BLOG
     </button>
     </form >
 
@@ -95,16 +103,16 @@ will be getting posted, so in that case as this is only view page, we hide
 will be getting posted, so in that case as this is only view page, we hide
  like, comment and edit  buttons  else if user clicks them : error will be
  generated-->
- <form method="post">
+ <form method="post" action="/blog/getBlog">
 
-        <button name="post_id" value="{{ blog.key().id()}}"
-                style="margin-top: 1em; margin-left: 0.7em" >Comment</button>
+        <button name="comment_post_id" value="{{ blog.key().id()}}"
+                style="margin-top: 1em; margin-left: 0.7em" >Comment Blog</button>
 
     </form>
 
-    <form method="post">
+    <form method="post" action="/blog/getBlog">
      <button name="delete_post_id" value="{{ blog.key().id()}}"
-             style="margin-top: 1em; margin-left: 0.7em" >Delete</button>
+             style="margin-top: 1em; margin-left: 0.7em" >Delete Blog</button>
     </form>
 
     {% if delete_error_id == blog.key().id() %}

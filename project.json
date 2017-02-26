@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mythic-producer-137123",
+  "private_key_id": "fb5e604612848ccb84960fd62e419d56b907ae43",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCo/WgibKB051z7\nKoV6A4u1zpamMQOdA71m2UodCXLg+aErP7zBale0Eq7hr4f2daVRhs9yA7Bc35Ud\n1Bi0FQP776bsRNED6o62zdpfF07dLD5Zv3aU7DaESRQ8PvOhMEzMMjJOd/FIfH4E\npTopVXmNFhvbCG64qd4ITTy1MWQTM9EVmjqxdcS82jivWVE2HsCdB5quhH8z+Ul0\noRVDEr5Q2sbVv4128gK076s4/S2fDeKpbi9glL6J67l2WNuN6eTkYi0Xcf84P62f\nzXY9J1t4rADdpRIPu//bNyT8XL6OByIFjq/jspzibgC3RN+kPH5LiH9n3drp7zcY\nWLIMSEQ7AgMBAAECggEAZ0iR99A6dZjenGgNslgucIz2SFbWpYWeohiWEo8u1k/b\n8GoBPJl5RwbQOgGlcL3Qr7ZcXYvho7HHGrcB7jaV+8oqVGdu9BzM4u+H0uyU99rN\ntN6vZC/G1i0wH+49yzuRBJB9bLYkEzB7eO1fUdn6838awVEzEsxHdv116CxqxMy9\nPYnzuDKjOigIGNJbwjdeeqoQhzyRSW07y/LPSHO4xDzt5p2a2jZNbnVOaHXGihPY\nAiMro8Z93HPRhuurGiTn8hNV57KtSWGPtwbNkrtPKDcluf+QbqhllD/MNfTQBhgM\nWLauO8rMVwkUjsYCYMaoWUQkJlNgzvGIJv9iYOptuQKBgQDYnLyVuUngB5sxfkJO\nFaIWUaM4MaIeDY1fN2deGqLysnsb22ctL/EL0h/El7AE5ueP2yxoTq8LID6CBHaZ\npo+bx8cYzgiO+q5l/LzqIgAoFQZIVCAx+VR3vU7eua66Kq/yZw8x++qcGuyxLZ3s\nMG4hcYOaxjlde7sZXGBr36bYrQKBgQDHt9s6FPLk0wizf/EW5cuwJ6/1pmNh/MRF\npskEioQmZlF9xPZr30egvyuFEDacYc1OXSnOPBxCL7rEHfqOgo6LxAwe6KOI3zIi\nHEOnay9EZJW8nsffJYbxaG0rnfi/7Q0y0plYOEP94PcLulY3Wp48b5bqtn5ie6rt\nnIcsPkclhwKBgBH5P3S1ATpDp07+CQZtqRts/rwk8izINxjVghA+6ZJ12N1A4VjQ\nh5HRh61KYOKnPkOjjhXBoaisrkMfl6+8MGJeu1iFkBQ9HMd9pzdORvEMfY723A0J\ngUbGQIseoS71Z9AXWR1up9L4MPeqr1Xv1tOTlbX8CLqHD8lU7vNEhZWpAoGAFkU+\nQP/NBg8yTTHbJH6DdCU4zd+7/VU+XbX3fHYlvlJyi9/GysifKCGpLLFeJZoSVsa0\nvradQBQqc2wUYIfWdWdrIpc2hTC+Wmdkc+rT3oCI4fuithNtNMY8RjzbXCuG6T/q\nsZe0nT7UzY39xzZnpr2aypmHBlxb9xsZR6m6LUkCgYEAnLg5Ds4Z0B82irV5+t5L\nNW5UPa58oLE40LUoM/3B1GCiGRz4Yuw0dhFl7cw5DyNBhv82pDg31rB+glic09Ev\nzOuRqBr8zmklzYZu34+WVBDVNlNa/RTjvDsG0Di6tja1sF3hAwTZXsRqjgLrsXO8\nrquX3sgA2Bvo6yhCI8K8lnQ=\n-----END PRIVATE KEY-----\n",
+  "client_email": "pro-drive-cam@mythic-producer-137123.iam.gserviceaccount.com",
+  "client_id": "103443778189556989543",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pro-drive-cam%40mythic-producer-137123.iam.gserviceaccount.com"
+}

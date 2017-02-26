@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mythic-producer-137123",
+  "private_key_id": "7ebeea1ff4adbe4dcd5c6220b7eac8f67d41ac32",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC4QBPmDhlMfidX\nUCWt5C7eZQwMhdLH7niBwhXWvZTMSHsb2TNTyK/tXeYaH8BJINQ9p8zEbhegSE++\n+wiaZGoGxKGIDRrs0sz6zwSsQQSUB23GYfeHyE9EmUZNy6wvONViM/rkUZQkxRSP\nYYvEJ8ILNsuJ7gVxMKfY6pVEfozod3gTTOUTLVEQu1lXxJ1cGCVcJkDxYWl0SeFG\nsORbEaZCZmi9k7dGthHOVY3dd41YJ+MIAqtNYYPAUiQ+oJSl4M/rCB6j00pE6vtJ\nC4UvFv//Bkp5k+bqJqDu7Mdqmo6RBT6/GJKkBnKY5kpmKf/7btG4Fonqpt82g+7g\nhECtNmuvAgMBAAECggEBAJKEwk4r4ApoN7jDT3NdBbhs+ovqz5eWF9Z4FQ3TbMSW\nzu9yZdK2wNAt35HetfZxWNY+3iNGuRsI5gGld03vlDEVpK6gXUz+xWqdvcWNXqqo\nza74sPMVY5PVn4a19JMIywdw9o8iIICtCJCMrayrQS/Rv0JMOZ+tZYyl31W8nSku\nnVw2Tl4nuW3Ya80QyecSy7P8RSbRU4C9p8wz86+sq2d2cd/qPon3NThI6MNCDiVg\nHkB1xljkTFtZO2DwV6akjTAVejHDholdL3w/yWNb9NE0XAcaZmwdSHiizBwc0KnQ\nJ3l12hSat75E7OEJ1G6vj7O4YlVWKqbIn71NeqPaLKECgYEA7QuKihs9521iUjLl\n3diaEh4GpbZ9tGqJ4xY857h+wF3VU6vHI4K9BePHDTRV13cNzMHGB0AWa8b2plNH\n3ejxiqUS1JNHBDDCGhZbsplaRvotPkJATX7BntnZ1ag1S0meB2JB3ZE0A0hFUqHq\nSRYjod/NNPMSwsiqdD03Gk9ReUUCgYEAxvvLf7V5Sb2q6ie8Y1Lb7BvgVSsFX46b\ndrk6M4Pci4dicyyUVMqG341um6MgA4hqzgYpvq6iNXfYsr5QSB9BL5kO4U19M67z\npdU4+waSYSAnSCqQEd85SZLd/PHXkua6igQPdFHZs/tFw4gDU9NVxAR+vvtZPojA\neUrWgz0TzmMCgYEAvkrMja/u0xExo/EuLRjMHo0yIufMJAB+7ukUPaUTQ9RQA9pb\ng/tZSRgg3E3ON6lgT6ajFYDyPtU7fixO/isZdIauBi6xDQEjYRPfyxFmsqH1ngxL\nWKrQPnh+chGVrvnLPfw4CemeCqCC3iITVVbLhhCGyOH1hp7Wj3fw+1L/gc0CgYBw\nHJxatyfAOYIb7gmBuMS6cjZiJhwf69yB9vjo34maf8wjcmGcqIN3X1uLi0xVUT5E\nGEra6c/w6jaI9xuKlzmGFOnCXYOGZDNZIxq4rMo6uQAI9Bo6R5gicQJsKuK4HRHL\nA2ClvBw6AQAcm/yr9S2khJfZCQsOZcR0UossZHRNWwKBgQDWjYEs1ASgSR1EqHDp\nP4wxgzagW5tQQA75yf6SKwvXAvX6f6vSy36NoD0mG7X9XkZ5/CO/8INQDaM7HR5P\nxZJgyjGQtNe/GhYTFTuVfbqT8zU88Wfr89cdcvCYIt8oZuPKv03+RlgfByZAfPWf\n3Y6BkE1SRj40H6qCKrjzeDtKIw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "cloud-bucket@mythic-producer-137123.iam.gserviceaccount.com",
+  "client_id": "105286318147549400589",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cloud-bucket%40mythic-producer-137123.iam.gserviceaccount.com"
+}

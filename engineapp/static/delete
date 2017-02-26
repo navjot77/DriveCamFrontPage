@@ -1,0 +1,57 @@
+#!/usr/bin/python
+
+import boto
+import gcs_oauth2_boto_plugin
+import os
+import shutil
+import StringIO
+import tempfile
+import time
+
+# URI scheme for Cloud Storage.
+GOOGLE_STORAGE = 'gs://pro-drive-cam-bucket/'
+# URI scheme for accessing local files.
+LOCAL_FILE = '/Users/navjotsingh/Desktop/cloud-storage-logo.png'
+
+# Fallback logic. In https://console.cloud.google.com/
+# under Credentials, create a new client ID for an installed application.
+# Required only if you have not configured client ID/secret in
+# the .boto file or as environment variables.
+
+CLIENT_ID="32555940559.apps.googleusercontent.com"
+CLIENT_SECRET="ZmssLNjJy2998hD4CTg2ejr2"
+
+gcs_oauth2_boto_plugin.SetFallbackClientIdAndSecret(CLIENT_ID, CLIENT_SECRET)
+
+uri = boto.storage_uri('', GOOGLE_STORAGE)
+# If the default project is defined, call get_all_buckets() without arguments.
+for bucket in uri.get_all_buckets(headers=header_values):
+  print bucket.name
+
+
+
+
+
+from googleapiclient import discovery
+from oauth2client.client import GoogleCredentials
+
+credentials = GoogleCredentials.get_application_default()
+service = discovery.build('storage', 'v1', credentials=credentials)
+
+filename = '/Users/navjotsingh/Desktop/cloud-storage-logo.png'
+bucket = 'pro-drive-cam-bucket'
+
+body = {'name': 'dest_file_name.png'}
+req = service.objects().insert(bucket=bucket, body=body, media_body=filename)
+resp = req.execute()
+
+
+
+export BOTO_CONFIG="$HOME/.boto"
+export GOOGLE_APPLICATION_CREDENTIALS=My\ Project-fb5e60461284.json
+
+
+gcloud auth activate-service-account --key-file newKey.json
+responses to the following questions.
+What is your google access key ID? GOOGQH6O7OMXVVZBVEUV
+What is your google secret access key? 8sQFVtZV9jMEGwOrx/21fN5I/tLM6XKB08Rhk6uw
